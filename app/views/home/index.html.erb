@@ -1,0 +1,4 @@
+<h4>Home#Index</h4>
+<% if user_signed_in? %>
+<%= "Hello " + current_user.email %>
+<% end %>
