@@ -5,7 +5,7 @@
 ### 1. install rvm on your computer. (need bash shell) 
 
 ```console
-\curl –L https://get.rvm.io$|$bash
+\curl –L https://get.rvm.io | bash
 ```
 
 ### 2. install ruby-2.0.0-p247
