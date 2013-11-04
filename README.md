@@ -23,7 +23,7 @@ rvm use 2.0.0-p247
 ### 4. install ruby gems
 
 ```console
-gem install bundler && bundle install
+bundle install
 ```
 
 ### 5. initialize database, load pre-set data.
