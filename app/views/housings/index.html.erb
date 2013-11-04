@@ -1,6 +1,10 @@
 <h1>Listing housings</h1>
+<br><br>
 
 <%= link_to 'New Housing', new_housing_path, class: 'btn' %>
+<br><br>
+<% if @own_housings.count > 0%>
+<h2>Your housings:</h2>
 
 <table class="table table-striped">
   <thead>
@@ -16,15 +20,44 @@
   </thead>
 
   <tbody>
-    <% @housings.each do |housing| %>
+    <% @own_housings.each do |housing| %>
       <tr>
-        <td><%= housing.title %> <%= link_to housing.user.email, users_show_path(housing.user) %></td>
+        <td><%= housing.title %></td>
         <td><%= housing.description %></td>
         <td><%= housing.address %></td>
         <td><%= housing.image_url %></td>
         <td><%= link_to 'Show', housing, class: 'btn btn-mini' %></td>
         <td><%= link_to 'Edit', edit_housing_path(housing), class: 'btn btn-mini' %></td>
         <td><%= link_to 'Destroy', housing, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-mini btn-danger'  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+
+<h2>Other people's housings:</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Address</th>
+      <th>Image url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @other_housings.each do |housing| %>
+      <tr>
+        <td><%= housing.title %> <%= link_to housing.user.email, users_show_path(housing.user) %></td>
+        <td><%= housing.description %></td>
+        <td><%= housing.address %></td>
+        <td><%= housing.image_url %></td>
+        <td><%= link_to 'Show', housing, class: 'btn btn-mini' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -4,7 +4,13 @@ class FurnituresController < ApplicationController
   # GET /furnitures
   # GET /furnitures.json
   def index
-    @furnitures = Furniture.all
+    if current_user.nil? then
+      @other_furnitures = Furniture.all
+      @own_furnitures = []
+    else
+      @other_furnitures = Furniture.where("user_id != ?", current_user.id)
+      @own_furnitures = current_user.furnitures
+    end
   end
 
   # GET /furnitures/1
@@ -14,25 +20,33 @@ class FurnituresController < ApplicationController
 
   # GET /furnitures/new
   def new
+    authenticate_user!
     @furniture = Furniture.new
   end
 
   # GET /furnitures/1/edit
   def edit
+    authenticate_user!
   end
 
   # POST /furnitures
   # POST /furnitures.json
   def create
-    @furniture = Furniture.new(furniture_params)
+    authenticate_user!
+    @furniture = current_user.furnitures.new(furniture_params)
 
     respond_to do |format|
-      if @furniture.save
-        format.html { redirect_to @furniture, notice: 'Furniture was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @furniture }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @furniture.errors, status: :unprocessable_entity }
+      if @furniture.user != current_user then
+        format.html { redirect_to @furniture, alert: 'You don\'t have right for this action.' }
+        format.json { head :no_content }
+      else 
+        if @furniture.save
+          format.html { redirect_to @furniture, notice: 'Furniture was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @furniture }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @furniture.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -40,13 +54,19 @@ class FurnituresController < ApplicationController
   # PATCH/PUT /furnitures/1
   # PATCH/PUT /furnitures/1.json
   def update
+    authenticate_user!
     respond_to do |format|
-      if @furniture.update(furniture_params)
-        format.html { redirect_to @furniture, notice: 'Furniture was successfully updated.' }
+      if @furniture.user != current_user then
+        format.html { redirect_to @furniture, alert: 'You don\'t have right for this action.' }
         format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @furniture.errors, status: :unprocessable_entity }
+      else 
+        if @furniture.update(furniture_params)
+          format.html { redirect_to @furniture, notice: 'Furniture was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @furniture.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

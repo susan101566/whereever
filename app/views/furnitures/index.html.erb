@@ -1,6 +1,9 @@
 <h1>Listing furnitures</h1>
-
+<br><br>
 <%= link_to 'New Furniture', new_furniture_path, class: 'btn' %>
+<br><br>
+<% if @own_furnitures.count > 0%>
+<h2>Your furnitures:</h2>
 
 <table class="table table-striped">
   <thead>
@@ -15,14 +18,41 @@
   </thead>
 
   <tbody>
-    <% @furnitures.each do |furniture| %>
+    <% @own_furnitures.each do |furniture| %>
       <tr>
-        <td><%= furniture.title %> <%= link_to furniture.user.email, users_show_path(furniture.user) %></td>
+        <td><%= furniture.title %> </td>
         <td><%= furniture.description %></td>
         <td><%= furniture.image_url %></td>
         <td><%= link_to 'Show', furniture, class: 'btn btn-mini' %></td>
         <td><%= link_to 'Edit', edit_furniture_path(furniture), class: 'btn btn-mini' %></td>
         <td><%= link_to 'Destroy', furniture, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<h2>Other people's furnitures:</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Image url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @other_furnitures.each do |furniture| %>
+      <tr>
+        <td><%= furniture.title %> <%= link_to furniture.user.email, users_show_path(furniture.user) %></td>
+        <td><%= furniture.description %></td>
+        <td><%= furniture.image_url %></td>
+        <td><%= link_to 'Show', furniture, class: 'btn btn-mini' %></td>
       </tr>
     <% end %>
   </tbody>
