@@ -1,32 +1,22 @@
-<h1>Listing furnitures</h1>
-
-<%= link_to 'New Furniture', new_furniture_path, class: 'btn' %>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Image url</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @furnitures.each do |furniture| %>
-      <tr>
-        <td><%= furniture.title %> <%= link_to furniture.user.email, users_show_path(furniture.user) %></td>
-        <td><%= furniture.description %></td>
-        <td><%= furniture.image_url %></td>
-        <td><%= link_to 'Show', furniture, class: 'btn btn-mini' %></td>
-        <td><%= link_to 'Edit', edit_furniture_path(furniture), class: 'btn btn-mini' %></td>
-        <td><%= link_to 'Destroy', furniture, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<table style="width: 1090px;">
+	<tr>
+		<td><h1>Furnitures</h1></td>
+		<td style="text-align: right;"><h1><%= link_to 'New Furniture', new_furniture_path, class: 'btn btn-info' %></h1></td>
+	</tr>
 </table>
+
+<div id="panels" />
+<script>
+<% @furnitures.each do |furniture| %>
+  new Block('<%= furniture.title %>', 
+  	'<%= furniture.image_url %>', 
+  	'<%= furniture.description %>', 
+  	'<%= furniture.id %>',
+  	0);
+<% end %>
+renderGrid();
+</script>
+
 
 <br>
 

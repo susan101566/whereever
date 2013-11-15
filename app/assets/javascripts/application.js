@@ -15,3 +15,81 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+var blocks = [];
+var blocksTable = [[], [], [], [], []];
+var panelX = 200;
+var marginX = 20;
+var maxFImgIdx = 11;
+var maxHImgIdx = 11;
+var furnitureType = 0;
+var housingType = 1;
+
+function Block(title, imgUrl, description, id, type){
+	this.title = title;
+	this.imgUrl = imgUrl;
+	this.description = description;
+	var idx = blocks.length;
+	blocks.push(this);
+	this.col = idx%5;
+	this.row = blocksTable[this.col].length;
+	this.id = id;
+	this.type = type;
+	blocksTable[this.col].push(this);
+}
+
+Block.prototype.getX = function(){
+	return this.col * (panelX + marginX);
+};
+
+Block.prototype.getY = function(){
+	return this.row * (panelY + marginY);
+};
+
+function renderPanel(block){
+	// create the new div
+	var newDiv = $('<div></div>');
+	newDiv.addClass('thumbnail');
+	newDiv.addClass('block');
+	//$newDiv.css('height', 200);
+	
+	// feed content to the new div
+	var fImgIdx = (Math.floor(Math.random()*maxFImgIdx))+1;
+	var hImgIdx = (Math.floor(Math.random()*maxHImgIdx))+1;
+	var newImg;
+	var newShow;
+	var newLike;
+	if(block.type === housingType){
+		newImg = $('<img src="/assets/h' + hImgIdx + '.jpg" ></img>');
+		newShow = $('<a class="btn btn-mini btn-info block_button" href="/housings/' + block.id + '">Show </a>');
+		newLike = $('<a class="btn btn-mini block_button" href="/housings/' + block.id + '">Like </a>');
+	}
+	else{
+		newImg = $('<img src="/assets/f' + fImgIdx + '.jpg" ></img>');
+		newShow = $('<a class="btn btn-mini btn-info block_button" href="/furnitures/' + block.id + '">Show </a>');
+		newLike = $('<a class="btn btn-mini block_button" href="/furnitures/' + block.id + '">Like </a>');
+	}
+	var newHeader = $('<h4>'+block.title+'</h4>');
+	var newP = $('<p>' + block.description + '</p>');
+	newShow.css("left", "10px");
+	newLike.css("left", "60px");
+	newDiv.append(newImg);
+	newDiv.append(newHeader);
+	newDiv.append(newP);
+	newDiv.append(newShow);
+	newDiv.append(newLike);
+	
+	// add the panel to panels div
+	$( "#panel_column"+block.col ).append( newDiv );
+}
+
+function renderGrid(divName){
+	for(var i = 0; i < blocksTable.length; i++){
+		var $newPanelColumn = $('<div id="panel_column'+i+'" class="panel_column"'+'></div>');
+		$newPanelColumn.css('left', (panelX+marginX) * i);
+		$( "#panels" ).append( $newPanelColumn );	
+	}
+	
+	for(var i = 0; i < blocks.length; i++){
+		renderPanel(blocks[i]);
+	}
+}

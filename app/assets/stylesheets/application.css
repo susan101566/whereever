@@ -11,3 +11,24 @@
  *= require_self
  *= require_tree .
  */
+
+.block{
+	width: 200px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.block_button{
+	position: absolute;
+	top: 10px;
+}
+
+#panels{
+	position: relative;
+	margin-top: 30px;
+}
+
+.panel_column{
+	position: absolute;
+	margin-right: 20px;
+}

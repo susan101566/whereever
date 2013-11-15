@@ -1,34 +1,18 @@
-<h1>Listing housings</h1>
-
-<%= link_to 'New Housing', new_housing_path, class: 'btn' %>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Address</th>
-      <th>Image url</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @housings.each do |housing| %>
-      <tr>
-        <td><%= housing.title %> <%= link_to housing.user.email, users_show_path(housing.user) %></td>
-        <td><%= housing.description %></td>
-        <td><%= housing.address %></td>
-        <td><%= housing.image_url %></td>
-        <td><%= link_to 'Show', housing, class: 'btn btn-mini' %></td>
-        <td><%= link_to 'Edit', edit_housing_path(housing), class: 'btn btn-mini' %></td>
-        <td><%= link_to 'Destroy', housing, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-mini btn-danger'  %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<table style="width: 1090px;">
+	<tr>
+		<td><h1>Housing</h1></td>
+		<td style="text-align: right;"><h1><%= link_to 'New housing', new_furniture_path, class: 'btn btn-info' %></h1></td>
+	</tr>
 </table>
 
-<br>
-
+<div id="panels" />
+<script>
+<% @housings.each do |housing| %>
+  new Block('<%= housing.title %>', 
+  	'<%= housing.image_url %>', 
+  	'<%= housing.description %>', 
+  	'<%= housing.id %>',
+  	1);
+<% end %>
+renderGrid();
+</script>
