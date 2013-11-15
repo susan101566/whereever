@@ -1,4 +1,4 @@
-<%= form_for(@furniture) do |f| %>
+<%= simple_form_for(@furniture) do |f| %>
   <% if @furniture.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@furniture.errors.count, "error") %> prohibited this furniture from being saved:</h2>
@@ -23,7 +23,5 @@
     <%= f.label :image_url %><br>
     <%= f.text_field :image_url %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :submit, "Create Furniture", class: "btn btn-primary" %>
 <% end %>
