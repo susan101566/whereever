@@ -45,7 +45,7 @@ Block.prototype.getY = function(){
 	return this.row * (panelY + marginY);
 };
 
-function renderPanel(block){
+function renderPanel(block, parent){
 	// create the new div
 	var newDiv = $('<div></div>');
 	newDiv.addClass('thumbnail');
@@ -60,12 +60,12 @@ function renderPanel(block){
 	var newLike;
 	if(block.type === housingType){
 		newImg = $('<img src="/assets/h' + hImgIdx + '.jpg" ></img>');
-		newShow = $('<a class="btn btn-mini btn-info block_button" href="/housings/' + block.id + '">Show </a>');
+		newShow = $('<a class="btn btn-mini btn-primary block_button" href="/housings/' + block.id + '">Show </a>');
 		newLike = $('<a class="btn btn-mini block_button" href="/housings/' + block.id + '">Like </a>');
 	}
 	else{
 		newImg = $('<img src="/assets/f' + fImgIdx + '.jpg" ></img>');
-		newShow = $('<a class="btn btn-mini btn-info block_button" href="/furnitures/' + block.id + '">Show </a>');
+		newShow = $('<a class="btn btn-mini btn-primary block_button" href="/furnitures/' + block.id + '">Show </a>');
 		newLike = $('<a class="btn btn-mini block_button" href="/furnitures/' + block.id + '">Like </a>');
 	}
 	var newHeader = $('<h4>'+block.title+'</h4>');
@@ -79,7 +79,30 @@ function renderPanel(block){
 	newDiv.append(newLike);
 	
 	// add the panel to panels div
-	$( "#panel_column"+block.col ).append( newDiv );
+	parent.append( newDiv );
+}
+
+function renderThumbnail(block, parent){
+	// create the new div
+	var newDiv = $('<div></div>');
+	newDiv.addClass('thumbnail');
+	newDiv.addClass('block_square');
+	
+	// feed content to the new div
+	var fImgIdx = (Math.floor(Math.random()*maxFImgIdx))+1;
+	var hImgIdx = (Math.floor(Math.random()*maxHImgIdx))+1;
+	var newImg;
+	if(block.type === housingType){
+		newImg = $('<img src="/assets/h' + hImgIdx + '.jpg" ></img>');
+	}
+	else{
+		newImg = $('<img src="/assets/f' + fImgIdx + '.jpg" ></img>');
+	}
+	newImg.addClass('img_square');
+	newDiv.append(newImg);
+	
+	// add the panel to panels div
+	parent.append( newDiv );
 }
 
 function renderGrid(divName){
@@ -90,6 +113,14 @@ function renderGrid(divName){
 	}
 	
 	for(var i = 0; i < blocks.length; i++){
-		renderPanel(blocks[i]);
+		renderPanel(blocks[i], $( "#panel_column"+blocks[i].col));
+	}
+}
+
+function renderList(divName){
+	for(var i = 0; i < blocks.length; i++){
+		var newLi = $('<li></li>');
+		$('#panel_list').append(newLi);
+		renderThumbnail(blocks[i], newLi);
 	}
 }

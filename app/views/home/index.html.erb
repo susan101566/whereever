@@ -1,4 +1,16 @@
-<h4>Home#Index</h4>
-<% if user_signed_in? %>
-<%= "Hello " + current_user.email %>
+<img src="assets/homebg1.jpg" id="bg_img" />	
+<img src="assets/title.png" id="home_title">
+<ul id="panel_list" class="nav nav-pills"></ul>
+<h1 style="position: absolute; top: 250px; left: 550px;"><%= link_to 'View Furnitures', furnitures_path, class: 'btn btn-primary' %></h1>
+<h1 style="position: absolute; top: 250px; left: 720px;"><%= link_to 'View Housings', housings_path, class: 'btn btn-primary' %></h1>
+<p style="color: #77CCFF; position: absolute; top: 610px; left: 670px;">Recently Posted</p>
+<script>
+<% (1..12).each do |i| %>
+new Block('Hello', 
+  	'imgurl', 
+  	'description', 
+  	'1',
+  	0);
 <% end %>
+renderList();
+</script>
