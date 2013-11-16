@@ -62,7 +62,7 @@ function renderPanel(block, parent){
 		newLike = $('<a class="btn btn-mini block_button" href="/housings/' + block.id + '">Like </a>');
 	}
 	else{
-		newImg = $('<img src=' + block.imgUrl + '.jpg" ></img>');
+		newImg = $('<img src=' + block.imgUrl + ' ></img>');
 		newShow = $('<a class="btn btn-mini btn-info block_button" href="/furnitures/' + block.id + '">Show </a>');
 		newLike = $('<a class="btn btn-mini block_button" href="/furnitures/' + block.id + '">Like </a>');
 	}
