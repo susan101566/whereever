@@ -5,11 +5,9 @@ class FurnituresController < ApplicationController
   # GET /furnitures.json
   def index
     if current_user.nil? then
-      @other_furnitures = Furniture.all
-      @own_furnitures = []
+      @furnitures = Furniture.all
     else
-      @other_furnitures = Furniture.where("user_id != ?", current_user.id)
-      @own_furnitures = current_user.furnitures
+      @furnitures = Furniture.where("user_id != ?", current_user.id)
     end
   end
 

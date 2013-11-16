@@ -5,11 +5,9 @@ class HousingsController < ApplicationController
   # GET /housings.json
   def index
     if current_user.nil? then
-      @other_housings = Housing.all
-      @own_housings = []
+      @housings = Housing.all
     else
-      @other_housings = Housing.where("user_id != ?", current_user.id)
-      @own_housings = current_user.housings
+      @housings = Housing.where("user_id != ?", current_user.id)
     end
   end
 
