@@ -16,8 +16,8 @@ puts "Deleting all furnitures..."
 Furniture.delete_all
 
 puts "Initiating..."
-maxFImgNum = 12;
-maxHImgNum = 12;
+maxFImgNum = 11;
+maxHImgNum = 11;
 
 puts "Creating users..."
 for i in 0..9
@@ -29,7 +29,7 @@ for i in 0..9
               
   puts "Creating housings for this user..."
   for i in (user.id * 10)..(user.id * 10 + 9)
-    imgIdx = rand(maxHImgNum);
+    imgIdx = 1 + rand(maxHImgNum);
     user.housings.create(
                    title: "Housing " + i.to_s,
                    description: "This is the description for housing " \
@@ -40,7 +40,7 @@ for i in 0..9
   
   puts "Creating furnitures for this user..."
   for i in (user.id * 10)..(user.id * 10 + 9)
-    imgIdx = rand(maxFImgNum);
+    imgIdx = 1 + rand(maxFImgNum);
     user.furnitures.create(
                    title: "Furniture " + i.to_s,
                    description: "This is the description for furniture " \

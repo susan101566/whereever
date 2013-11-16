@@ -53,18 +53,16 @@ function renderPanel(block){
 	//$newDiv.css('height', 200);
 	
 	// feed content to the new div
-	var fImgIdx = (Math.floor(Math.random()*maxFImgIdx))+1;
-	var hImgIdx = (Math.floor(Math.random()*maxHImgIdx))+1;
 	var newImg;
 	var newShow;
 	var newLike;
 	if(block.type === housingType){
-		newImg = $('<img src="/assets/h' + hImgIdx + '.jpg" ></img>');
+		newImg = $('<img src=' + block.imgUrl + ' ></img>');
 		newShow = $('<a class="btn btn-mini btn-info block_button" href="/housings/' + block.id + '">Show </a>');
 		newLike = $('<a class="btn btn-mini block_button" href="/housings/' + block.id + '">Like </a>');
 	}
 	else{
-		newImg = $('<img src="/assets/f' + fImgIdx + '.jpg" ></img>');
+		newImg = $('<img src=' + block.imgUrl + '.jpg" ></img>');
 		newShow = $('<a class="btn btn-mini btn-info block_button" href="/furnitures/' + block.id + '">Show </a>');
 		newLike = $('<a class="btn btn-mini block_button" href="/furnitures/' + block.id + '">Like </a>');
 	}
