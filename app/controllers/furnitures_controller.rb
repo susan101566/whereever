@@ -25,6 +25,7 @@ class FurnituresController < ApplicationController
   # GET /furnitures/1/edit
   def edit
     authenticate_user!
+    @furniture = Furniture.new
   end
 
   # POST /furnitures
