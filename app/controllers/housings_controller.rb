@@ -4,7 +4,13 @@ class HousingsController < ApplicationController
   # GET /housings
   # GET /housings.json
   def index
-    @housings = Housing.all
+    if current_user.nil? then
+      @other_housings = Housing.all
+      @own_housings = []
+    else
+      @other_housings = Housing.where("user_id != ?", current_user.id)
+      @own_housings = current_user.housings
+    end
   end
 
   # GET /housings/1
@@ -20,6 +26,7 @@ class HousingsController < ApplicationController
 
   # GET /housings/1/edit
   def edit
+    authenticate_user!
   end
 
   # POST /housings
@@ -42,6 +49,7 @@ class HousingsController < ApplicationController
   # PATCH/PUT /housings/1
   # PATCH/PUT /housings/1.json
   def update
+    authenticate_user!
     respond_to do |format|
       if @housing.update(housing_params)
         format.html { redirect_to @housing, notice: 'Housing was successfully updated.' }
