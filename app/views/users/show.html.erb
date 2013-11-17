@@ -1,3 +1,13 @@
 <h2>Users#show</h2>
 <%= link_to('Edit', '/users/edit', class: "btn btn-primary") %>
 <p>Showing <%= @user.email %></p>
+
+<h3>Housings:</h3>
+<% @housings.each do |housing| %>
+<%= link_to housing.title, housing_path(housing) %>
+<% end %>
+
+<h3>Furnitures:</h3>
+<% @furnitures.each do |furniture| %>
+<%= link_to furniture.title, furniture_path(furniture) %>
+<% end %>

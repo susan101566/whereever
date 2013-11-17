@@ -11,9 +11,22 @@
 </p>
 
 <p>
+	<strong>Price:</strong>
+	<%= "$" + @furniture.price.to_s %>
+</p>
+
+<p>
   <strong>Image url:</strong>
   <%= @furniture.image_url %>
 </p>
 
+<p>
+	<strong>Belongs to:</strong>
+	<%= link_to @furniture.user.email, users_show_path(@furniture.user) %>
+</p>
+
+
+<% if current_user && @furniture.user == current_user %>
 <%= link_to 'Edit', edit_furniture_path(@furniture) %> |
+<% end %>
 <%= link_to 'Back', furnitures_path %>

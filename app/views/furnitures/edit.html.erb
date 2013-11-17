@@ -2,5 +2,9 @@
 
 <%= render 'form' %>
 
+<%= link_to "Delete", @furniture, method: :delete,
+							class: 'btn btn-danger',
+							data: { confirm: 'Are you sure?' } %>
+							
 <%= link_to 'Show', @furniture %> |
 <%= link_to 'Back', furnitures_path %>

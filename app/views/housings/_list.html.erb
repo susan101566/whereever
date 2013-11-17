@@ -1,0 +1,30 @@
+<ul>
+	<% housings.each do |housing| %>
+	<p>
+	  <strong>Title:</strong>
+	  <%= housing.title %>
+	</p>
+
+	<p>
+	  <strong>Description:</strong>
+	  <%= housing.description %>
+	</p>
+
+	<p>
+	  <strong>Address:</strong>
+	  <%= housing.address %>
+	</p>
+
+	<p>
+		<strong>Price:</strong>
+		<%= "$" + housing.price.to_s %>
+	</p>
+
+	<p>
+	  <strong>Image url:</strong>
+	  <%= housing.image_url %>
+	</p>
+
+	<% end %>
+	
+</ul>

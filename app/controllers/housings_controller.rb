@@ -25,7 +25,7 @@ class HousingsController < ApplicationController
   # GET /housings/1/edit
   def edit
     authenticate_user!
-    @housing = Furniture.new
+    @housing = Housing.new
   end
 
   # POST /housings

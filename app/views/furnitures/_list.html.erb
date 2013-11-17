@@ -1,0 +1,26 @@
+<ul>
+	<% furnitures.each do |furniture| %>
+	<p>
+	  <strong>Title:</strong>
+	  <%= furniture.title %>
+	</p>
+
+	<p>
+	  <strong>Description:</strong>
+	  <%= furniture.description %>
+	</p>
+
+	<p>
+		<strong>Price:</strong>
+		<%= "$" + furniture.price.to_s %>
+	</p>
+
+	<p>
+	  <strong>Image url:</strong>
+	  <%= furniture.image_url %>
+	</p>
+	
+
+	<% end %>
+	
+</ul>

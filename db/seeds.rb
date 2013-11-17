@@ -35,7 +35,8 @@ for i in 0..9
                    description: "This is the description for housing " \
                    + i.to_s,
                    address: "Forbes Avenue " + i.to_s,
-                   image_url: "/assets/h" + imgIdx.to_s + ".jpg")
+                   image_url: "/assets/h" + imgIdx.to_s + ".jpg",
+                   price: 500 + rand(500))
   end
   
   puts "Creating furnitures for this user..."
@@ -45,7 +46,8 @@ for i in 0..9
                    title: "Furniture " + i.to_s,
                    description: "This is the description for furniture " \
                    + i.to_s,
-                   image_url: "/assets/f" + imgIdx.to_s + ".jpg")
+                   image_url: "/assets/f" + imgIdx.to_s + ".jpg",
+                   price: 100 + rand(100))
   end
 end
 
